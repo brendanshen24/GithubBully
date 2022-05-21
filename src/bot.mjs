@@ -10,17 +10,17 @@ const checkContributionStatus = (guild,channel) => {
     const channele = channel;
     (async () => {
         const repos = await githubContribs.fetch(
-            'marvinirwin', // username
+            'ENTER GITHUB USERNAME HERE', // username
             date.format(new Date(), 'YYYY-MM-DD'),     // --since
             date.format(new Date(), 'YYYY-MM-DD'),             // --until
         );
         const repolist = Array.from(repos)
         if (repolist.length === 0){
-            channele.send('<@USERID HERE> fuck you, you lazy ass cunt, you got no work and no bitches done today. how about you get up off your ass and do some work.')
+            channele.send('<@USERID HERE> Do some work')
 
         }
         if (repolist.length >= 1){
-            channele.send('<@USERID HERE> good job fuckhead. today, you made contributions to ' + repolist.toString())
+            channele.send('<@USERID HERE> good job. today, you made contributions to ' + repolist.toString())
         }
     })();
 }
@@ -28,7 +28,7 @@ const checkContributionStatus = (guild,channel) => {
 
 client.once("ready", () => {
 
-    let scheduledMessage = new cron.CronJob('00 00 00 * * *', () => {
+    let scheduledMessage = new cron.CronJob('00 00 00 * * *', () => {//24 hour time, in time zone of client. formatted as 00 MIN HOUR
         const guild = client.guilds.cache.get('SERVER ID');
         const channel = guild.channels.cache.get('TEXT CHANNEL ID');
         checkContributionStatus(guild,channel)
